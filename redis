@@ -1,0 +1,42 @@
+#!/bin/bash
+# Redis daemon scripts
+# chkconfig: 3 64 36
+# description:  redis start scripts
+CONFIG=/etc/redis.conf
+PID=/var/run/redis.pid
+SI=/usr/local/redis/bin/redis-server
+CI=/usr/local/redis/bin/redis-cli
+
+case $1  in 
+
+start)
+      if [ -e $PID ]
+      then
+           echo "redis is up"
+           exit 1
+      else
+            echo redis start ..........
+            $SI $CONFIG
+            if [ $? = 0 ]
+            then
+                 echo "redis start success"
+            else
+                 echo "redis start failed"
+            fi
+      fi
+      ;;
+stop)
+     $CI -a xxxxx shutdown  # -a 指定redis密码
+     if [ $? = 0 -a ! -e $PID ]
+     then
+          echo "stop success"
+     else
+          echo "stop failed"
+     fi
+      ;;
+status)
+        netstat -tnpl |grep 6379 >/dev/null 2>&1 && echo "redis running " || echo "redis stop"
+      ;;
+*)
+     echo "Usage: $0 (start|stop|sttus)"
+esac
