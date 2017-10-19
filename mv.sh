@@ -9,9 +9,9 @@ case $# in
 ;;
 esac
 
-for filename in *.$1
+for suffix in *.$1
 do
-    mv $filename ${filename%$1}$2
+    mv $suffix ${suffix%$1}$2
 done
 
 exit 0
