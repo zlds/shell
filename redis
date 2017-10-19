@@ -38,5 +38,5 @@ status)
         netstat -tnpl |grep 6379 >/dev/null 2>&1 && echo "redis running " || echo "redis stop"
       ;;
 *)
-     echo "Usage: $0 (start|stop|sttus)"
+     echo "Usage: $0 (start|stop|status)"
 esac
